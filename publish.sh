@@ -8,5 +8,4 @@ if test "$1" != "patch" && test "$1" != "minor" && test "$1" != "major"; then
 fi
 
 npm version $1
-npm run build
 npm publish
