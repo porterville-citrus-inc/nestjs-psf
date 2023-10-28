@@ -1,7 +1,5 @@
 # Nest PSF (Page, Sort, Filter)
 
-[![CircleCI](https://circleci.com/gh/Shift3/nestjs-psf/tree/master.svg?style=svg)](https://circleci.com/gh/Shift3/nestjs-psf/tree/master)
-
 Nest PSF is a library that provides helpers for easy pagination, sorting, and filtering for your API.
 
 ## Getting Started
@@ -9,7 +7,11 @@ Nest PSF is a library that provides helpers for easy pagination, sorting, and fi
 Install the package.
 
 ```bash
-npm install --save nestjs-psf
+npm install "https://github.com/porterville-citrus-inc/nestjs-psf" # Latest on main
+
+# ---- OR ----
+
+npm install "https://github.com/porterville-citrus-inc/nestjs-psf#semver:^1.0.0" # Specific version
 ```
 
 Use in your controller
@@ -53,9 +55,7 @@ For pagination, the parameter decorator to use in your controller is the `@Pagin
 
 ```typescript
 // for query builder we use .paginate instead of .getMany
-await this.someRepository
-  .createQueryBuilder()
-  .paginate(paginateParams);
+await this.someRepository.createQueryBuilder().paginate(paginateParams);
 
 // for repository we use the provided paginate helper
 await paginate(this.someRepository, paginateParams);
@@ -63,7 +63,7 @@ await paginate(this.someRepository, paginateParams);
 // you can pass regular repository FindOptions as the 3rd param,
 // this is the same as if you were calling repo.find()
 await paginate(this.someRepository, paginateParams, {
-  where: { age: MoreThan(5) }
+  where: { age: MoreThan(5) },
 });
 ```
 
@@ -112,7 +112,7 @@ await this.someRepository
 
 // you can use the sortAndFilter helper to make a FindOptions
 // for use in the repository .find method
-await this.someRepository.find(sortAndFilter(sortAndFilterParams))
+await this.someRepository.find(sortAndFilter(sortAndFilterParams));
 ```
 
 This can also be combined with pagination.
@@ -125,7 +125,11 @@ await this.someRepository
   .paginate(paginateParams);
 
 // repository
-await paginate(this.someRepository, paginateParams, sortAndFilter(sortAndFilterParams));
+await paginate(
+  this.someRepository,
+  paginateParams,
+  sortAndFilter(sortAndFilterParams)
+);
 ```
 
 ## Sorting
@@ -157,7 +161,7 @@ You can filter against multiple attribute by separating them with columns, for e
 A list of all operators are as follows:
 
 | Query Param Operator | Effect                       |
-|----------------------|------------------------------|
+| -------------------- | ---------------------------- |
 | `eq`                 | exactly equals to            |
 | `neq`                | not exactle equals to        |
 | `contains`           | contains somewhere within it |
@@ -168,4 +172,3 @@ A list of all operators are as follows:
 | `lte`                | less than or equal to        |
 | `startswith`         | starts with                  |
 | `endswith`           | ends with                    |
-
