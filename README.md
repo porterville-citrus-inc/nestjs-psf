@@ -4,14 +4,10 @@ Nest PSF is a library that provides helpers for easy pagination, sorting, and fi
 
 ## Getting Started
 
-Install the package.
+Install the package using the link to a [release] tarball:
 
 ```bash
-npm install "https://github.com/porterville-citrus-inc/nestjs-psf" # Latest on main
-
-# ---- OR ----
-
-npm install "https://github.com/porterville-citrus-inc/nestjs-psf#semver:^1.0.0" # Specific version
+npm install "https://github.com/porterville-citrus-inc/nestjs-psf/releases/download/v1.1.4/nestjs-psf-1.1.4.tgz"
 ```
 
 Use in your controller
@@ -48,6 +44,8 @@ When using the parameter decorators in your controllers it is good practice to s
 ```
 
 For details on each of these, see below.
+
+[release]: https://github.com/porterville-citrus-inc/nestjs-psf/releases
 
 ## Pagination
 
@@ -172,3 +170,30 @@ A list of all operators are as follows:
 | `lte`                | less than or equal to        |
 | `startswith`         | starts with                  |
 | `endswith`           | ends with                    |
+
+# Creating a new release
+
+This package is intended for use directly from Github, using NPM's ability to
+add a dependency from a given URL. To create a new release for use this way, use
+one of the included NPM scripts.
+
+Note: this requires the `gh` CLI installed and authenticated. You will also need
+to configure the default remote repo: `gh repo set-default`
+
+To release incrementing the version:
+
+```sh
+npm run release --next-ver=minor # Or any string accepted by `npm version`.
+```
+
+Shortcut to release incrementing the patch version:
+
+```sh
+npm run rel:patch
+```
+
+To release without incrementing the version (useful when testing):
+
+```sh
+npm run release
+```
